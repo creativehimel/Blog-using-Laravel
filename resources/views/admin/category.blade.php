@@ -2,6 +2,7 @@
 @php
     $page = "Dashboard / All Categories"
 @endphp
+@section('title', 'Categories')
 @section('content')
 <div class="row">
     <div class="col-md-12">
@@ -96,8 +97,12 @@
                                 type="text"
                                 id="name"
                                 name="name"
-                                class="form-control"
-                                placeholder="Enter your category Name" />
+                                class="form-control @error('name') is-invalid @enderror"
+                                plaslugceholder="Enter your category Name" 
+                                value="{{old('name')}}"/>
+                                @error('name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -107,14 +112,21 @@
                                 type="text"
                                 id="slug"
                                 name="slug"
-                                class="form-control"
-                                placeholder="Enter your category slug" />
+                                class="form-control  @error('slug') is-invalid @enderror"
+                                placeholder="Enter your category slug"
+                                value="{{old('slug')}}" />
+                                 @error('slug')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" name="description" id="description"></textarea>
+                            <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description"></textarea>
+                             @error('description')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                         </div>
                     </div>
                     <div class="row">
