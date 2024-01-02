@@ -57,9 +57,13 @@
                                                 <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="{{'#edit'.$category->id.'Category'}}">
                                                     <i class="ti ti-pencil me-1"></i> Edit
                                                 </button>
-                                               <button class="dropdown-item">
-                                                   <i class="ti ti-trash me-1"></i> Delete
-                                               </button>
+                                                <form action="{{route('categories.destroy', $category->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="dropdown-item">
+                                                        <i class="ti ti-trash me-1"></i> Delete
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
