@@ -14,4 +14,9 @@ class Category extends Model
         "description",
         "status",
     ];
+
+    public function post()
+    {
+        return $this->hasOne(Post::class);
+    }
 }

@@ -56,10 +56,10 @@
                 Category
               </a>
             </li>
-            <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+            <li class="menu-item @if($page == 'Dashboard / All Posts') active @endif">
+              <a href="{{route('posts.index')}}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-messages"></i>
-                <div data-i18n="Chat">Chat</div>
+                Post
               </a>
             </li>
             <li class="menu-item">
