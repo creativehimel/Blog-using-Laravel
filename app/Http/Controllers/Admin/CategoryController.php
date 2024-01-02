@@ -32,8 +32,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "name" => "required|string|unique:categories",
-            "slug" => "required|string",
+            "name" => "required|string",
+            "slug" => "required|string|unique:categories",
             "description" => "required|string",
         ]);
         $slug = Str::slug($request->slug);
@@ -67,7 +67,30 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::find($id);
+        if ($category->slug == $request->slug )
+        {
+            $request->validate([
+                "name" => "required|string",
+                "slug" => "required|string",
+                "description" => "required|string",
+            ]);
+        }else{
+            $request->validate([
+                "name" => "required|string",
+                "slug" => "required|string|unique:categories",
+                "description" => "required|string",
+            ]);
+        }
+
+        $slug = Str::slug($request->slug);
+        $category->update([
+            "name"=> $request->name,
+            "slug"=> $slug,
+            "description"=> $request->description,
+            "status" => $request->status,
+        ]);
+        return redirect()->route("categories.index")->with("success","Category updated successfully");
     }
 
     /**
