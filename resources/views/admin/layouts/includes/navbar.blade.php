@@ -487,11 +487,11 @@
                       </a> --}}
                       <form action="{{route('admin.logout')}}" method="POST">
                         @csrf
-                        <button type="submit" class="dropdown-item">
+                        <button type="submit" class="dropdown-item logout">
                           <i class="ti ti-logout me-2 ti-sm"></i>
                           <span class="align-middle">Log Out</span>
                         </button>
-                        
+
                       </form>
                     </li>
                   </ul>

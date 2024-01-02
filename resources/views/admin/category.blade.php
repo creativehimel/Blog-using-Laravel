@@ -12,12 +12,6 @@
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory">Add Category</button>
                 </h5>
                 <div class="table-responsive text-nowrap mb-2">
-                    @if (session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            {{session('success')}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                     @if ($categories->isEmpty())
                         <h6 class="text-center py-2">No Record Found. Please inster a new record</h6>
                     @else
@@ -60,7 +54,7 @@
                                                 <form action="{{route('categories.destroy', $category->id)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button class="dropdown-item">
+                                                    <button class="dropdown-item delete">
                                                         <i class="ti ti-trash me-1"></i> Delete
                                                     </button>
                                                 </form>

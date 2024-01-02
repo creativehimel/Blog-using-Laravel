@@ -43,7 +43,11 @@ class CategoryController extends Controller
             "description"=> $request->description,
             "status" => $request->status,
             ]);
-            return redirect()->route("categories.index")->with("success","Category created successfully");
+        $notify = [
+            'message' => 'Category created successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notify);
     }
 
     /**
@@ -90,7 +94,11 @@ class CategoryController extends Controller
             "description"=> $request->description,
             "status" => $request->status,
         ]);
-        return redirect()->route("categories.index")->with("success","Category updated successfully");
+        $notify = [
+            'message' => 'Category updated successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notify);
     }
 
     /**
@@ -100,6 +108,10 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-        return redirect()->route("categories.index")->with("success","Category deleted successfully");
+        $notify = [
+            'message' => 'Category deleted successfully',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notify);
     }
 }
