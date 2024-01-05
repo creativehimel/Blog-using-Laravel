@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -85,7 +86,47 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Post::find($id);
+        if ($post->slug == $request->slug){
+            $request->validate([
+                "title" => "required|string",
+                "slug" => "required|string",
+                "description" => "required|string",
+                "category_id" => "required"
+            ]);
+        }else{
+            $request->validate([
+                "title" => "required|string",
+                "slug" => "required|string|unique:posts",
+                "description" => "required|string",
+                "category_id" => "required"
+            ]);
+        }
+        $slug = Str::slug($request->slug);
+        $data = [
+            "title" => $request->title,
+            "slug" => $slug,
+            "description" => $request->description,
+            "category_id" => $request->category_id,
+            "status" => $request->status,
+        ];
+        if ($request->hasFile('thumbnail'))
+        {
+            if ($request->old_thumbnail){
+                File::delete(public_path('uploads/post/'.$request->old_thumbnail));
+            }
+            $file = $request->thumbnail;
+            $extension = $file->getClientOriginalExtension();
+            $fileName = 'post'.'-'.time().'.'.$extension;
+            $file->move('uploads/post/', $fileName);
+            $data['thumbnail'] = $fileName;
+        }
+        $post->update($data);
+        $notify = [
+            'message' => 'Post updated successfully!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notify);
     }
 
     /**
@@ -93,6 +134,16 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        if($post->thumbnail){
+            File::delete(public_path('uploads/post/'.$post->thumbnail));
+        }
+        $post->delete();
+
+        $notify = [
+            'message' => 'Post deleted successfully!',
+            'alert-type' => 'success'
+        ];
+        return redirect()->back()->with($notify);
     }
 }
