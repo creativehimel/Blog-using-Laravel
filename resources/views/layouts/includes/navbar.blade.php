@@ -1,7 +1,7 @@
 <header class="navigation fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-white">
-            <a class="navbar-brand order-1" href="index.html">
+            <a class="navbar-brand order-1" href="/">
                 <img class="img-fluid" width="100px" src="{{asset('frontendAssets/images/logo.png')}}"
                      alt="Reader | Hugo Personal Blog Template">
             </a>

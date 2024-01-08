@@ -7,21 +7,12 @@
                 <div class="col-lg-9 mx-auto">
                     <h1 class="mb-5">What Would You <br> Like To Read Today?</h1>
                     <ul class="list-inline widget-list-inline">
-                        <li class="list-inline-item"><a href="tags.html">City</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Creative</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Demo</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Elements</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Fish</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Food</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Nice</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Season</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Taste</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Tasty</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Vlog</a></li>
-                        <li class="list-inline-item"><a href="tags.html">Wow</a></li>
+                        @foreach($categories as $category)
+                            <li class="list-inline-item">
+                                <a href="{{route('filterByCategory', $category->id)}}">{{$category->name}}</a>
+                            </li>
+                        @endforeach
+
                     </ul>
                 </div>
             </div>
@@ -214,14 +205,13 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8  mb-5 mb-lg-0">
                     <h2 class="h5 section-title">Recent Post</h2>
-
                     @foreach($posts as $post)
                         <article class="card mb-4">
                             <div class="post-slider">
-                                <img src="{{asset('frontendAssets/images/post/post-1.jpg')}}" class="card-img-top" alt="post-thumb">
+                                <img src="{{asset('uploads/post/'.$post->thumbnail)}}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title" href="post-details.html">Advice From a Twenty Something</a></h3>
+                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{$post->title}}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">
@@ -230,20 +220,14 @@
                                         </a>
                                     </li>
                                     <li class="list-inline-item">
-                                        <i class="ti-timer"></i>2 Min To Read
+                                        <i class="ti-calendar"></i>{{date('d M Y'), strtotime($post->created_at)}}
                                     </li>
                                     <li class="list-inline-item">
-                                        <i class="ti-calendar"></i>14 jan, 2020
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <ul class="card-meta-tag list-inline">
-                                            <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
-                                            <li class="list-inline-item"><a href="tags.html">Creative</a></li>
-                                        </ul>
+                                        Category: <span class="text-primary">{{$post->category->name}}</span>
                                     </li>
                                 </ul>
                                 <p>It’s no secret that the digital industry is booming. From exciting startups to global brands, companies are reaching out to digital agencies, responding to the new possibilities available.</p>
-                                <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+                                <a href="{{route('single_post', $post->slug)}}" class="btn btn-outline-primary">Read More</a>
                             </div>
                         </article>
                     @endforeach

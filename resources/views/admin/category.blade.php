@@ -125,9 +125,9 @@
                                                                 name="status"
                                                                 id="status"
                                                             >
-                                                                <option selected>Select Status</option>
-                                                                <option value="0">Inactive</option>
-                                                                <option value="1">Active</option>
+                                                                <option disabled>Select Status</option>
+                                                                <option value="0" @if($category->status == 0) selected @endif>Inactive</option>
+                                                                <option value="1" @if($category->status == 1) selected @endif>Active</option>
                                                             </select>
                                                         </div>
                                                     </div>

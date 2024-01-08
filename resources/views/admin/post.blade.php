@@ -39,7 +39,7 @@
                                         <img src="{{asset('uploads/post/'.$post->thumbnail)}}" alt="{{$post->thumbnail}}" width="45" height="45">
                                     </td>
                                     <td>{{$post->slug}}</td>
-                                    <td>{{$post->description}}</td>
+                                    <td class="w-50">{{$post->description}}</td>
                                     <td>{{$post->category->name}}</td>
                                     <td>
                                         @if ($post->status == 1)

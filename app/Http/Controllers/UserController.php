@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $posts = Post::all()->where('status', 1)->sortByDesc('created_at');
-        return view('user.index', compact('posts'));
+    public function getAllPostRecord(){
+        $posts = Post::with('category')->get()->where('status', 1)->sortByDesc('created_at');
+        $categories = Category::all()->where('status', 1)->sortByDesc('created_at');
+        return view('user.index', compact('posts', 'categories'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,18 +31,17 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function getSinglePostRecord(string $slug)
     {
-        //
+        $post = Post::with('category')->get()->where('slug', $slug)->first();
+        return view('user.singlePost', compact('post'));
+        //return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function getFilterCategoryPost(string $category_id)
     {
         //
     }
