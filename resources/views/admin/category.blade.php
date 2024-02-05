@@ -11,15 +11,15 @@
                     <span>Categories List</span>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCategory">Add Category</button>
                 </h5>
-                <div class="table-responsive text-nowrap mb-2">
+                <div class="table-responsive text-wrap mb-2">
                     @if ($categories->isEmpty())
                         <h6 class="text-center py-2">No Record Found. Please inster a new record</h6>
                     @else
                         <table class="table table-striped">
                             <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>S.N</th>
-                                <th>Category Name</th>
+                                <th>Name</th>
                                 <th>Slug</th>
                                 <th>Description</th>
                                 <th>Status</th>
@@ -32,7 +32,7 @@
                                     <td>
                                         <span class="fw-medium">{{++$id}}</span>
                                     </td>
-                                    <td>{{$category->name}}</td>
+                                    <td>{{ucfirst($category->name)}}</td>
                                     <td>{{$category->slug}}</td>
                                     <td>{{$category->description}}</td>
                                     <td>
@@ -183,40 +183,11 @@
                         </div>
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="slug" class="form-label">Category Slug</label>
-                                <input
-                                    type="text"
-                                    id="slug"
-                                    name="slug"
-                                    class="form-control  @error('slug') is-invalid @enderror"
-                                    placeholder="Enter your category slug"
-                                    value="{{old('slug')}}" />
-                                @error('slug')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-3">
                                 <label for="description" class="form-label">Description</label>
                                 <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description"></textarea>
                                 @error('description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-0">
-                                <label for="status">Status</label>
-                                <select
-                                    class="form-select"
-                                    name="status"
-                                    id="status"
-                                >
-                                    <option selected>Select Status</option>
-                                    <option value="0">Inactive</option>
-                                    <option value="1">Active</option>
-                                </select>
                             </div>
                         </div>
                     </div>

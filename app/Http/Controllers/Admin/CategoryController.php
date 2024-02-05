@@ -33,15 +33,13 @@ class CategoryController extends Controller
     {
         $request->validate([
             "name" => "required|string",
-            "slug" => "required|string|unique:categories",
             "description" => "required|string",
         ]);
-        $slug = Str::slug($request->slug);
+        $slug = Str::slug($request->name);
         $category = Category::create([
             "name"=> $request->name,
             "slug"=> $slug,
             "description"=> $request->description,
-            "status" => $request->status,
             ]);
         $notify = [
             'message' => 'Category created successfully',

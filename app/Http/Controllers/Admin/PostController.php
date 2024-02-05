@@ -37,11 +37,10 @@ class PostController extends Controller
         //dd($request->all());
         $request->validate([
             "title" => "required|string",
-            "slug" => "required|string|unique:posts",
             "description" => "required|string",
             "category_id" => "required"
         ]);
-        $slug = Str::slug($request->slug);
+        $slug = Str::slug($request->title);
         $data = [
             "title" => $request->title,
             "slug" => $slug,

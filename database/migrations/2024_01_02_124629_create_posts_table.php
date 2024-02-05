@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('description');
+            $table->longText('description');
             $table->string('thumbnail')->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->boolean('status')->default(1)->comment('0 = draft; 1 = published');

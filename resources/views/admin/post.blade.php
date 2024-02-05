@@ -11,7 +11,7 @@
                     <span>Posts List</span>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPost">Add Post</button>
                 </h5>
-                <div class="table-responsive text-nowrap mb-2">
+                <div class="table-responsive text-wrap mb-2">
                     @if ($posts->isEmpty())
                         <h6 class="text-center py-2">No Record Found. Please inster a new record</h6>
                     @else
@@ -34,12 +34,12 @@
                                     <td>
                                         <span class="fw-medium">{{++$id}}</span>
                                     </td>
-                                    <td>{{$post->title}}</td>
+                                    <td class="w-20">{{$post->title}}</td>
                                     <td>
                                         <img src="{{asset('uploads/post/'.$post->thumbnail)}}" alt="{{$post->thumbnail}}" width="45" height="45">
                                     </td>
-                                    <td>{{$post->slug}}</td>
-                                    <td class="w-50">{{$post->description}}</td>
+                                    <td class="w-20">{{$post->slug}}</td>
+                                    <td class="w-50">{{Str::words($post->description, 30)}}</td>
                                     <td>{{$post->category->name}}</td>
                                     <td>
                                         @if ($post->status == 1)
@@ -116,7 +116,7 @@
                                                     <div class="row">
                                                         <div class="col mb-3">
                                                             <label for="description" class="form-label">Description</label>
-                                                            <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description">{{$post->description}}</textarea>
+                                                            <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description" rows="8">{{$post->description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -214,23 +214,8 @@
                         </div>
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="slug" class="form-label">Post Slug</label>
-                                <input
-                                    type="text"
-                                    id="slug"
-                                    name="slug"
-                                    class="form-control  @error('slug') is-invalid @enderror"
-                                    placeholder="Enter your category slug"
-                                    value="{{old('slug')}}" />
-                                @error('slug')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description"></textarea>
+                                <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description" rows="6"></textarea>
                                 @error('description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
