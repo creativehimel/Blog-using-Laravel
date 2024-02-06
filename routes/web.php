@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, 'getAllPostRecord']);
 Route::get('/post/{slug}', [UserController::class, 'getSinglePostRecord'])->name('single_post');
-Route::get('/post/category/{category_id}', [UserController::class, 'getFilterCategoryPost'])->name('filterByCategory');
+Route::get('/post/category/{category_slug}', [UserController::class, 'getFilterCategoryPost'])->name('filterByCategory');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

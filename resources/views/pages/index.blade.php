@@ -9,7 +9,7 @@
                     <ul class="list-inline widget-list-inline">
                         @foreach($categories as $category)
                             <li class="list-inline-item">
-                                <a href="{{route('filterByCategory', $category->id)}}">{{$category->name}}</a>
+                                <a href="{{route('filterByCategory', $category->slug)}}">{{$category->name}}</a>
                             </li>
                         @endforeach
 
@@ -211,7 +211,7 @@
                                 <img src="{{asset('uploads/post/'.$post->thumbnail)}}" class="card-img-top" alt="post-thumb">
                             </div>
                             <div class="card-body">
-                                <h3 class="mb-3"><a class="post-title" href="post-details.html">{{$post->title}}</a></h3>
+                                <h3 class="mb-3"><a class="post-title" href="{{route('single_post', $post->slug)}}">{{$post->title}}</a></h3>
                                 <ul class="card-meta list-inline">
                                     <li class="list-inline-item">
                                         <a href="author-single.html" class="card-meta-author">

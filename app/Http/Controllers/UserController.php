@@ -11,7 +11,7 @@ class UserController extends Controller
     public function getAllPostRecord(){
         $posts = Post::with('category')->get()->where('status', 1)->sortByDesc('created_at');
         $categories = Category::all()->where('status', 1)->sortByDesc('created_at');
-        return view('user.index', compact('posts', 'categories'));
+        return view('pages.index', compact('posts', 'categories'));
     }
 
 
@@ -34,16 +34,20 @@ class UserController extends Controller
     public function getSinglePostRecord(string $slug)
     {
         $post = Post::with('category')->get()->where('slug', $slug)->first();
-        return view('user.singlePost', compact('post'));
+        return view('pages.singlePost', compact('post'));
         //return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function getFilterCategoryPost(string $category_id)
+    public function getFilterCategoryPost(string $category_slug)
     {
-        //
+        $posts = Category::with('post')->where('slug', $category_slug)->where('status', 1)->orderBy('created_at','desc')->get();
+        //$posts = Post::with('category')->where('id', $category_id)->where('status', 1)->orderBy('created_at','desc')->get();
+        return view('pages.filterByCategory', compact('posts'));
+        //return $posts;
+        //return $category;
     }
 
     /**
