@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
+
 
 class PostController extends Controller
 {
@@ -53,7 +56,13 @@ class PostController extends Controller
             $file = $request->thumbnail;
             $extension = $file->getClientOriginalExtension();
             $fileName = 'post'.'-'.time().'.'.$extension;
-            $file->move('uploads/post/', $fileName);
+            //$file->move('uploads/post/', $fileName);
+
+            // Image Resize
+            $manager = new ImageManager(new Driver());
+            $thumbnail = $manager->read($file);
+            $thumbnail->resize(600,360)->save(public_path('uploads/post/'.$fileName));
+
             $data['thumbnail'] = $fileName;
         }
         Post::create($data);
@@ -117,7 +126,11 @@ class PostController extends Controller
             $file = $request->thumbnail;
             $extension = $file->getClientOriginalExtension();
             $fileName = 'post'.'-'.time().'.'.$extension;
-            $file->move('uploads/post/', $fileName);
+            // $file->move('uploads/post/', $fileName);
+            // Image Resize
+            $manager = new ImageManager(new Driver());
+            $thumbnail = $manager->read($file);
+            $thumbnail->resize(600,360)->save(public_path('uploads/post/'.$fileName));
             $data['thumbnail'] = $fileName;
         }
         $post->update($data);

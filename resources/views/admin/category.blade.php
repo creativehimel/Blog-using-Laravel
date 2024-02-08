@@ -28,7 +28,7 @@
                             </thead>
                             <tbody class="table-border-bottom-0">
                             @foreach ($categories as $id => $category)
-                                <tr>
+                                <tr class="text-center">
                                     <td>
                                         <span class="fw-medium">{{++$id}}</span>
                                     </td>
