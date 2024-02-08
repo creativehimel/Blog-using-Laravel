@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class RegisteredUserController extends Controller
 {
@@ -34,13 +36,24 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'image' => ['image']
         ]);
-
-        $user = User::create([
+        $data = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+        ];
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $fileName = 'user-'.time() .'.'. $file->getClientOriginalExtension();
+            $manager = new ImageManager(new Driver());
+            $avater = $manager->read($file);
+            $avater->resize(300,300)->save(public_path('images/users/'.$fileName));
+            $data['image'] = $fileName;
+        }
+
+
+        $user = User::create($data);
 
         event(new Registered($user));
 
