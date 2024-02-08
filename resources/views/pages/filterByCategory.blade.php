@@ -42,9 +42,7 @@
                         
         @endforeach
       </div>
-
-
-
+      @include('components.common.sidebar')
     </div>
   </div>
 </section>

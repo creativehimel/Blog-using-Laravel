@@ -4,22 +4,7 @@
               stroke-width="2" />
     </svg>
 
-    <div class="instafeed text-center mb-5">
-        <h2 class="h3 mb-4">INSTAGRAM POST</h2>
-
-        <div class="instagram-slider">
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/1.jpg')}}" alt="instagram image 1"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/2.jpg')}}" alt="instagram image 2"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/4.jpg')}}" alt="instagram image 3"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/3.jpg')}}" alt="instagram image 4"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/2.jpg')}}" alt="instagram image 5"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/1.jpg')}}" alt="instagram image 6"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/3.jpg')}}" alt="instagram image 7"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/4.jpg')}}" alt="instagram image 8"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/2.jpg')}}" alt="instagram image 9"></div>
-            <div class="instagram-post"><img src="{{asset('frontendAssets/images/instagram/4.jpg')}}" alt="instagram image 10"></div>
-        </div>
-    </div>
+    
 
     <div class="container">
         <div class="row align-items-center">
