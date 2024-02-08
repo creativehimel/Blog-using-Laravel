@@ -116,7 +116,7 @@
                                                     <div class="row">
                                                         <div class="col mb-3">
                                                             <label for="description" class="form-label">Description</label>
-                                                            <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description" rows="8">{{$post->description}}</textarea>
+                                                            <textarea class="form-control summernote  @error('description') is-invalid @enderror" name="description" id="description" rows="8">{{$post->description}}</textarea>
                                                             @error('description')
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
@@ -183,7 +183,7 @@
         </div>
     </div>
     {{-- Add Category Model Start --}}
-    <div class="modal fade" id="addPost" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <div class="modal modal-lg fade" id="addPost" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -215,7 +215,7 @@
                         <div class="row">
                             <div class="col mb-3">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control  @error('description') is-invalid @enderror" name="description" id="description" rows="6"></textarea>
+                                <textarea class="form-control summernote  @error('description') is-invalid @enderror" name="description" id="description" rows="6"></textarea>
                                 @error('description')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
