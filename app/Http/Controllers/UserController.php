@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\PostComment;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -33,9 +34,12 @@ class UserController extends Controller
 
     public function getSinglePostRecord(string $slug)
     {
+
         $post = Post::with('category')->get()->where('slug', $slug)->first();
-        return view('pages.singlePost', compact('post'));
-        //return $post;
+        //$comments = PostComment::where('post_id', $post->id)->get();
+        $comments = PostComment::with('post', 'user')->where('post_id', $post->id)->paginate(3);
+        return view('pages.singlePost', compact('post', 'comments'));
+        //return $comments;
     }
 
     /**
@@ -64,5 +68,18 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function commentStore(Request $request,string $slug){
+        $post = Post::where('slug', $slug)->first();
+        $data = [
+            'post_id'=> $post->id,
+            'user_id' => auth()->user()->id,
+            'comment'=> $request->comment,
+        ];
+
+        PostComment::create($data);
+        $notify = ['message' => 'Comment added successfully', 'alert-type'=> 'success'];
+        return redirect()->back()->with($notify);
     }
 }

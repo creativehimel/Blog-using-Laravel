@@ -42,7 +42,9 @@
                         
         @endforeach
       </div>
+      <aside class="col-lg-4">
       @include('components.common.sidebar')
+      </aside>
     </div>
   </div>
 </section>

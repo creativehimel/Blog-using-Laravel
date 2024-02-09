@@ -112,7 +112,10 @@
                         </li>
                     </ul>
                 </div>
-                @include('components.common.sidebar')
+                <aside class="col-lg-4 sidebar-home">
+                    @include('components.common.sidebar')
+                </aside>
+                
             </div>
         </div>
     </section>
